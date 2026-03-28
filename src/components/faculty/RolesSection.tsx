@@ -17,15 +17,25 @@ const roles = [
   {
     title: "Member, CodeTantra Team",
     icon: "💻",
-    details: ["Active participation in online learning platform coordination"],
+    details: [
+      "Assisted students in solving programming problems on CodeTantra platform",
+      "Provided guidance in Java and C programming concepts and coding practices",
+      "Helped students debug code and improve problem-solving skills",
+      "Actively supported lab sessions and hands-on coding activities",
+    ],
   },
   {
     title: "Member, Project Development Team",
     icon: "🛠️",
-    details: ["Guiding student projects and technical skill development"],
+    details: [
+      "Supervised final year BCA student project submissions and evaluations",
+      "Conducted project viva sessions to assess technical understanding",
+      "Reviewed project documentation including reports and project files",
+      "Guided students in improving project quality and technical implementation",
+    ],
   },
   {
-    title: "Admission Cell & Counselor (BCA)",
+    title: "Admission Counselor (BCA)",
     icon: "🎯",
     details: [
       "Academic counseling to prospective students",
@@ -35,17 +45,24 @@ const roles = [
     ],
   },
   {
-    title: "Mridang (Annual Cultural Fest)",
+    title: "Mridang (Annual Cultural Fest) Team",
     icon: "🎭",
     details: [
-      "Prize Distribution coordination",
-      "Coordination of Fun & Cultural Activities",
+      "Coordinated prize distribution and ensured smooth execution",
+      "Organized fun games and cultural activities",
+      "Collaborated with team for effective event management",
+      "Ensured active student participation and engagement",
     ],
   },
   {
-    title: "Debate Competition Coordinator",
-    icon: "🎤",
-    details: ["Coordinating inter-departmental debate competitions"],
+    title: "Debate Competition Coordinator & Judge",
+icon: "🗣️",
+details: [
+  "Coordinated and managed debate competition activities",
+  "Served as a judge, evaluating participants’ performance",
+  "Ensured smooth execution of the event",
+  "Organized under the guidance of Ms. Suchitra Pal (Soft Skills Development Trainer)"
+]
   },
 ];
 
