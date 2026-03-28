@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 25% 6%;
+    --foreground: 40 20% 92%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 40 65% 55%;
+    --primary-foreground: 220 25% 6%;
+
+    --secondary: 220 18% 16%;
+    --secondary-foreground: 40 20% 85%;
+
+    --muted: 220 15% 14%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 200 60% 45%;
+    --accent-foreground: 40 20% 95%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 40 65% 55%;
+
+    --radius: 0.75rem;
+
+    --gold-glow: 40 70% 50%;
+    --navy-deep: 220 30% 4%;
+    --navy-mid: 220 20% 12%;
+    --teal: 180 50% 40%;
+    --glass: 220 20% 10%;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(40 70% 55%), hsl(45 80% 65%), hsl(35 65% 50%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-hero {
+    background: radial-gradient(ellipse at 20% 50%, hsl(220 30% 12%) 0%, hsl(220 25% 6%) 70%);
+  }
+
+  .bg-gradient-section {
+    background: linear-gradient(180deg, hsl(220 25% 6%) 0%, hsl(220 20% 8%) 50%, hsl(220 25% 6%) 100%);
+  }
+
+  .glass-card {
+    background: hsl(220 20% 10% / 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(40 65% 55% / 0.1);
+  }
+
+  .glass-card-hover {
+    background: hsl(220 20% 10% / 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(40 65% 55% / 0.1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsl(40 65% 55% / 0) 0%, hsl(40 65% 55% / 0.08) 50%, hsl(40 65% 55% / 0) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glass-card-hover::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent 0%, hsl(40 65% 55% / 0.06) 25%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+    animation: rotate-glow 4s linear infinite paused;
+  }
+
+  .glass-card-hover:hover::before {
+    opacity: 1;
+  }
+
+  .glass-card-hover:hover::after {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
+  .glass-card-hover:hover {
+    border-color: hsl(40 65% 55% / 0.4);
+    box-shadow:
+      0 0 30px hsl(40 65% 55% / 0.12),
+      0 0 60px hsl(40 65% 55% / 0.06),
+      0 20px 40px hsl(220 25% 0% / 0.4),
+      inset 0 1px 0 hsl(40 65% 55% / 0.15);
+    transform: translateY(-6px) scale(1.02);
+  }
+
+  /* Tilt hover - 3D perspective tilt */
+  .hover-tilt {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+
+  .hover-tilt:hover {
+    transform: perspective(800px) rotateY(-5deg) rotateX(3deg) translateY(-6px) scale(1.03);
+    box-shadow:
+      10px 20px 40px hsl(40 65% 55% / 0.1),
+      0 0 50px hsl(40 65% 55% / 0.06);
+  }
+
+  /* Flip card */
+  .hover-flip-container {
+    perspective: 1200px;
+  }
+
+  .hover-flip {
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+  }
+
+  .hover-flip-container:hover .hover-flip {
+    transform: rotateY(180deg);
+  }
+
+  .hover-flip-front,
+  .hover-flip-back {
+    backface-visibility: hidden;
+  }
+
+  .hover-flip-back {
+    transform: rotateY(180deg);
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Lamp glow - visible warm light */
+  .hover-lamp {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hover-lamp::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 120%;
+    background: radial-gradient(ellipse at top, hsl(40 70% 55% / 0.2) 0%, hsl(40 65% 50% / 0.05) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+  }
+
+  .hover-lamp:hover::before {
+    opacity: 1;
+  }
+
+  .hover-lamp:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 -10px 40px hsl(40 70% 55% / 0.15),
+      0 10px 30px hsl(220 25% 0% / 0.3);
+  }
+
+  /* Ultra glossy shine */
+  .hover-glossy {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hover-glossy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(40 65% 80% / 0.12), transparent);
+    transition: none;
+    pointer-events: none;
+    z-index: 1;
+    transform: skewX(-20deg);
+  }
+
+  .hover-glossy:hover::before {
+    animation: glossy-shine 0.8s ease forwards;
+  }
+
+  /* Scale bounce */
+  .hover-bounce {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+  }
+
+  .hover-bounce:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 40px hsl(40 65% 55% / 0.15);
+  }
+
+  .gold-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(40 65% 55%), transparent);
+  }
+
+  .glow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: hsl(40 65% 55%);
+    box-shadow: 0 0 12px hsl(40 65% 55% / 0.6), 0 0 24px hsl(40 65% 55% / 0.3);
+  }
+
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20 py-20 md:py-28;
+  }
+}
+
+@keyframes rotate-glow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glossy-shine {
+  0% { left: -100%; }
+  100% { left: 150%; }
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(220 25% 6%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(40 65% 55% / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(40 65% 55% / 0.5);
+}
+
+/* Custom cursor glow effect */
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(40 65% 55% / 0.06) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.3s;
+}
