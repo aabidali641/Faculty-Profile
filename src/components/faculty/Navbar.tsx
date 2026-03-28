@@ -37,7 +37,7 @@ const Navbar = () => {
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <button onClick={() => handleNav("#")} className="font-display text-lg font-bold text-gradient-gold hover:drop-shadow-[0_0_20px_hsl(40,65%,55%,0.5)] transition-all duration-300">
-          A. Ali
+          Aabid Ali
         </button>
 
         {/* Desktop */}
