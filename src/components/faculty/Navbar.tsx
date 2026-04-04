@@ -18,14 +18,32 @@ const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
+
     window.addEventListener("scroll", onScroll);
-    gsap.fromTo(navRef.current, { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, delay: 1.5 });
+
+    gsap.fromTo(
+      navRef.current,
+      { y: -60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, delay: 1.5 },
+    );
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleNav = (href: string) => {
     setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+
+    // 👉 Home scroll (TOP)
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    // 👉 Section scroll
+    const section = document.querySelector(href);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -36,11 +54,15 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-        <button onClick={() => handleNav("#")} className="font-display text-lg font-bold text-gradient-gold hover:drop-shadow-[0_0_20px_hsl(40,65%,55%,0.5)] transition-all duration-300">
+        {/* Logo / Name */}
+        <button
+          onClick={() => handleNav("#")}
+          className="font-display text-lg font-bold text-gradient-gold hover:drop-shadow-[0_0_20px_hsl(40,65%,55%,0.5)] transition-all duration-300"
+        >
           Aabid Ali
         </button>
 
-        {/* Desktop */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <button
@@ -53,18 +75,30 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Mobile toggle */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden flex flex-col gap-1.5 p-2"
         >
-          <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span
+            className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${
+              mobileOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <span
+            className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${
+              mobileOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`block w-5 h-0.5 bg-foreground transition-all duration-300 ${
+              mobileOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden glass-card mt-2 mx-4 rounded-xl p-4 space-y-3">
           {navItems.map((item) => (
